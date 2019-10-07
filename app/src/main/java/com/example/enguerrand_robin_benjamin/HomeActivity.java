@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.enguerrand_robin_benjamin.model.User;
+import com.google.gson.Gson;
+
 public class HomeActivity extends AppCompatActivity {
 
     @Override
@@ -14,6 +17,10 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         ActionBar bar = getSupportActionBar();
         bar.setTitle("Home");
+
+        Gson gson = new Gson();
+        User user = gson.fromJson(getIntent().getStringExtra("user"), User.class);
+        System.out.println(user.toString());
     }
 
     @Override

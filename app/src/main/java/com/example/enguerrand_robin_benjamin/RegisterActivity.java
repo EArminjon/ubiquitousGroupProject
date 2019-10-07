@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.enguerrand_robin_benjamin.model.User;
@@ -24,11 +25,12 @@ public class RegisterActivity extends AppCompatActivity {
         FirebaseDatabaseHelper helper = new FirebaseDatabaseHelper();
         EditText login = findViewById(R.id.login);
         EditText password = findViewById(R.id.password);
+        Switch admin = findViewById(R.id.adminSwitch);
         String loginStr = login.getText().toString(), passwordStr = password.getText().toString();
         if (loginStr.isEmpty() || passwordStr.isEmpty())
             Toasty.error(this, "Fill the form please", Toast.LENGTH_SHORT, true).show();
         else
-            helper.register(new User(loginStr, passwordStr),
+            helper.register(new User(loginStr, passwordStr, admin.isChecked()),
                     (item) -> {
                         Intent intent = new Intent(this, LoginActivity.class);
                         startActivity(intent);

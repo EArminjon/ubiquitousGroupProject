@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.enguerrand_robin_benjamin.model.User;
+import com.google.gson.Gson;
 
 import es.dmoral.toasty.Toasty;
 
@@ -29,9 +30,12 @@ public class LoginActivity extends AppCompatActivity {
         if (loginStr.isEmpty() || passwordStr.isEmpty())
             Toasty.error(this, "Fill the form please", Toast.LENGTH_SHORT, true).show();
         else
-            helper.login(new User(loginStr, passwordStr),
+            helper.login(new User(loginStr, passwordStr, false),
                     (item) -> {
                         Intent intent = new Intent(this, HomeActivity.class);
+                        Gson gson = new Gson();
+                        String myJson = gson.toJson(item);
+                        intent.putExtra("user", myJson);
                         startActivity(intent);
                     },
                     (item) -> {

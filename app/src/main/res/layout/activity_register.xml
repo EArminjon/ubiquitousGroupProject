@@ -29,8 +29,8 @@
                 android:layout_height="wrap_content"
                 android:autofillHints="Login"
                 android:ems="10"
-                android:inputType="textPersonName"
                 android:hint="name"
+                android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -44,24 +44,35 @@
                 android:layout_marginTop="8dp"
                 android:autofillHints="no"
                 android:ems="10"
-                android:inputType="textPassword"
                 android:hint="password"
+                android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/login" />
+
+        <Switch
+                android:id="@+id/adminSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="8dp"
+                android:switchPadding="16dp"
+                android:text="Admin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/password" />
 
         <Button
                 android:id="@+id/submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/password"
+                android:layout_below="@+id/adminSwitch"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="8dp"
+                android:onClick="doRegister"
                 android:text="Sign up"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/password"
-                android:onClick="doRegister"/>
+                app:layout_constraintTop_toBottomOf="@+id/adminSwitch" />
 
     </android.support.constraint.ConstraintLayout>
 </RelativeLayout>
