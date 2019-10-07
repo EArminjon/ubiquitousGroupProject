@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "7814261506",
+    "firebase_url": "https://enguerrandrobinbenjamin.firebaseio.com",
+    "project_id": "enguerrandrobinbenjamin",
+    "storage_bucket": "enguerrandrobinbenjamin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:7814261506:android:d1e96554224b44349a301b",
+        "android_client_info": {
+          "package_name": "com.example.enguerrand_robin_benjamin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "7814261506-j2bccsotk6ii9sjgqtk6cp74a8ivh1lc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.enguerrand_robin_benjamin",
+            "certificate_hash": "a08808142bb1d8437e5848bde668290435e39af0"
+          }
+        },
+        {
+          "client_id": "7814261506-05uk3600qq9vu6lncrci1gjhtvc1tciv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-z7uwRb8wCOvZHpoGTW9nWMKkGMj9O3Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "7814261506-05uk3600qq9vu6lncrci1gjhtvc1tciv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

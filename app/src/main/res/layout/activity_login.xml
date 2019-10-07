@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".EnguerrandRobinBenjamin">
+        tools:context=".LoginActivity">
 
     <TextView
             android:id="@+id/textView"
@@ -14,44 +14,53 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="76dp"
-            android:text="Welcome to Quizz App"
+            android:text="Sign in"
             android:textSize="30sp" />
 
     <android.support.constraint.ConstraintLayout
             android:id="@+id/center"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            >
+            android:layout_centerInParent="true">
 
-        <Button
-                android:id="@+id/loginButton"
-                android:layout_width="match_parent"
+        <EditText
+                android:id="@+id/login"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="64dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="64dp"
-                android:text="Login"
+                android:autofillHints="Login"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:onClick="login"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-                android:id="@+id/registerButton"
-                android:layout_width="match_parent"
+        <EditText
+                android:id="@+id/password"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/loginButton"
+                android:layout_below="@+id/login"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="64dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="64dp"
-                android:text="Register"
+                android:autofillHints="no"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:hint="password"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/loginButton"
-                android:onClick="register"/>
+                app:layout_constraintTop_toBottomOf="@+id/login" />
+        <Button
+                android:id="@+id/submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/password"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/password"
+                android:text="Sign in"
+                android:onClick="doLogin"/>
 
     </android.support.constraint.ConstraintLayout>
 </RelativeLayout>
