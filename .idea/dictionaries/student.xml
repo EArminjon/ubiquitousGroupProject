@@ -2,6 +2,7 @@
   <dictionary name="student">
     <words>
       <w>firebase</w>
+      <w>quizz</w>
     </words>
   </dictionary>
 </component>

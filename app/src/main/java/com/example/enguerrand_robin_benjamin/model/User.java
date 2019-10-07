@@ -2,12 +2,13 @@ package com.example.enguerrand_robin_benjamin.model;
 
 import android.support.annotation.NonNull;
 
-public class User extends Object {
+public class User {
     public String name;
     public String password;
     public boolean admin;
 
-    public User() {} //keep for firebase
+    public User() {
+    } //keep for firebase
 
     public User(String name, String password, boolean admin) {
         this.name = name;
@@ -16,7 +17,6 @@ public class User extends Object {
     }
 
     @NonNull
-    @Override
     public String toString() {
         return "name: " + name + "\n" +
                 "password: " + password + "\n" +
