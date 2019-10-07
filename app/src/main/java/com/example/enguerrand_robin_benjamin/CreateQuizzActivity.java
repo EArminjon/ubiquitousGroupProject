@@ -24,10 +24,33 @@ public class CreateQuizzActivity extends AppCompatActivity {
     }
 
     public void addResponse(View view) {
-        View parent = (View)view.getParent();
-        LinearLayout linearLayout = parent.findViewById(R.id.reponsesList);
-        EditText editText = new EditText(this);
-        editText.setHint("response...");
-        linearLayout.addView(editText);
+        View parent = (View) view.getParent();
+        LinearLayout linearLayout = parent.findViewById(R.id.responsesList);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View child = inflater.inflate(R.layout.response, null);
+        linearLayout.addView(child);
+    }
+
+    public void submit(View view) {
+        String name = ((EditText) findViewById(R.id.name)).getText().toString();
+        System.out.println(name);
+        LinearLayout InputLinearLayout = findViewById(R.id.inputList);
+        final int childCount = InputLinearLayout.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View v1 = InputLinearLayout.getChildAt(i);
+            String questionName = ((EditText) v1.findViewById(R.id.questionName)).getText().toString();
+            System.out.println(questionName);
+
+            LinearLayout ResponseLinearLayout = findViewById(R.id.responsesList);
+            final int childCount2 = ResponseLinearLayout.getChildCount();
+            for (int j = 0; j < childCount2; j++) {
+                View v2 = ResponseLinearLayout.getChildAt(j);
+                String responseName = ((EditText) v2.findViewById(R.id.responseName)).getText().toString();
+                System.out.println(responseName);
+
+
+            }
+
+        }
     }
 }

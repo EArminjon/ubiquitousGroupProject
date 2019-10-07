@@ -19,7 +19,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-            android:id="@+id/reponsesList"
+            android:id="@+id/responsesList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -43,7 +43,7 @@
             android:onClick="addResponse"
             app:backgroundTint="#9C27B0"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reponsesList"
+            app:layout_constraintTop_toBottomOf="@+id/responsesList"
             app:rippleColor="#E91E63"
             app:srcCompat="@android:drawable/ic_input_add" />
 
