@@ -2,11 +2,12 @@ package com.example.enguerrand_robin_benjamin.model;
 
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Quizz {
     public String name;
-    public List<QuizzQuestion> questions;
+    public List<QuizzQuestion> questions = new ArrayList<>();
 
     public Quizz() {
     } //keep for firebase
