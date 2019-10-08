@@ -10,7 +10,9 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".CreateQuizzActivity" />
+        <activity
+                android:name=".CreateQuizzActivity"
+                android:parentActivityName=".HomeAdminActivity" />
         <activity android:name=".HomeActivity" />
         <activity
                 android:name=".EditQuizzActivity"

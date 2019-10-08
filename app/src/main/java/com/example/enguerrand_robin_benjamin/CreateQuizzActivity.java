@@ -1,5 +1,6 @@
 package com.example.enguerrand_robin_benjamin;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,6 +20,8 @@ public class CreateQuizzActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_quizz);
+        ActionBar bar = getSupportActionBar();
+        bar.setTitle("Create");
     }
 
 

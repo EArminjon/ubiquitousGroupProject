@@ -1,6 +1,7 @@
 package com.example.enguerrand_robin_benjamin;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,8 @@ public class EditQuizzActivity extends CreateQuizzActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_quizz);
+        ActionBar bar = getSupportActionBar();
+        bar.setTitle("Edit");
 
         Gson gson = new Gson();
         this.quizz = gson.fromJson(getIntent().getStringExtra("quizz"), Quizz.class);
