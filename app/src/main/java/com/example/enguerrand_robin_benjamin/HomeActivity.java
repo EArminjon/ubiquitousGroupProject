@@ -18,7 +18,6 @@ import com.example.enguerrand_robin_benjamin.model.QuizzQuestion;
 import com.example.enguerrand_robin_benjamin.model.User;
 import com.google.gson.Gson;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
@@ -47,9 +46,7 @@ public class HomeActivity extends AppCompatActivity {
             QuizzListAdapter productListViewAdapter = new QuizzListAdapter(items);
             ListView listView = findViewById(R.id.quizzList);
             listView.setAdapter(productListViewAdapter);
-        }, param -> {
-            System.out.println(param);
-        });
+        }, System.out::println);
 
 //        Quizz quizz = new Quizz("Les jeux",
 //                Arrays.asList(

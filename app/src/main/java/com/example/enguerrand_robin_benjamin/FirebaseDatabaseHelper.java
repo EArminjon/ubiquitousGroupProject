@@ -65,7 +65,7 @@ class FirebaseDatabaseHelper {
     void getAllQuizz(Callback success, Callback error) {
         DatabaseReference ref = mReference.child("quizz");
 
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<Quizz> quizz = new ArrayList<>();
