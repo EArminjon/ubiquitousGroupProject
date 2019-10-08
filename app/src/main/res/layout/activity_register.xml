@@ -67,6 +67,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/adminSwitch"
                 android:layout_alignParentEnd="true"
+                android:backgroundTint="@color/colorGreen"
+                android:textColor="#FFFFFF"
                 android:layout_marginTop="8dp"
                 android:onClick="doRegister"
                 android:text="@string/sign_up"

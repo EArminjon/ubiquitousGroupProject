@@ -57,6 +57,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/password"
                 android:layout_alignParentEnd="true"
+                android:backgroundTint="@color/colorBlue"
+                android:textColor="#FFFFFF"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
