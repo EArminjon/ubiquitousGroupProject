@@ -33,22 +33,19 @@ public class HomeAdminActivity extends AppCompatActivity {
         FirebaseDatabaseHelper helper = new FirebaseDatabaseHelper();
         helper.getAllQuizz(param -> {
             List<Quizz> items = (List<Quizz>) param;
-            System.out.println(param);
             QuizzListAdapter productListViewAdapter = new QuizzListAdapter(items);
             ListView listView = findViewById(R.id.quizzList);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                @Override
-                public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
-                    Quizz quizz = (Quizz) adapter.getItemAtPosition(position);
+            listView.setOnItemClickListener((adapter, v, position, id) -> {
+                Quizz quizz = (Quizz) adapter.getItemAtPosition(position);
 
-                    Intent intent = new Intent(HomeAdminActivity.this, EditQuizzActivity.class);
-                    Gson gson = new Gson();
-                    String myJson = gson.toJson(quizz);
-                    intent.putExtra("quizz", myJson);
-                    startActivity(intent);
-                }
+                Intent intent = new Intent(HomeAdminActivity.this, EditQuizzActivity.class);
+                Gson gson1 = new Gson();
+                String myJson = gson1.toJson(quizz);
+                intent.putExtra("quizz", myJson);
+                startActivity(intent);
             });
+
             listView.setAdapter(productListViewAdapter);
         }, System.out::println);
     }

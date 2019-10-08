@@ -20,4 +20,5 @@
     <string name="list_of_all_available_quizz">List of all available quizz</string>
     <string name="create_a_new_quizz">Create a new quizz</string>
     <string name="submit">Submit</string>
+    <string name="delete_this_quizz">Delete this Quizz</string>
 </resources>

@@ -10,7 +10,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 class FirebaseDatabaseHelper {
@@ -49,9 +51,34 @@ class FirebaseDatabaseHelper {
         });
     }
 
+    void deleteThisQuizz(Quizz quizz, Callback success, Callback error) {
+        DatabaseReference ref = mReference.child("quizz");
+        Map<String, Object> map = new HashMap<>();
+        String quizzKey = quizz.getDataBaseId();
+        if (quizzKey == null) {
+            error.run("Quizz id is null");
+            return;
+        }
+        String key = quizzKey;
+        map.put(key, null);
+        ref.updateChildren(map, (databaseError, databaseReference) -> {
+            if (databaseError != null) {
+                System.out.println("Data could not be deleted " + databaseError.getMessage());
+                error.run(databaseError.getMessage());
+            } else {
+                System.out.println("Data saved successfully.");
+                success.run(true);
+            }
+        });
+    }
+
     void insertThisQuizz(Quizz quizz, Callback success, Callback error) {
         DatabaseReference ref = mReference.child("quizz");
-        ref.push().setValue(quizz, (databaseError, databaseReference) -> {
+        Map<String, Object> map = new HashMap<>();
+        String quizzKey = quizz.getDataBaseId();
+        String key = quizzKey != null ? quizzKey : ref.push().getKey();
+        map.put(key, quizz);
+        ref.updateChildren(map, (databaseError, databaseReference) -> {
             if (databaseError != null) {
                 System.out.println("Data could not be saved " + databaseError.getMessage());
                 error.run(databaseError.getMessage());
@@ -70,8 +97,8 @@ class FirebaseDatabaseHelper {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<Quizz> quizz = new ArrayList<>();
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                    System.out.println(childSnapshot);
                     Quizz item = childSnapshot.getValue(Quizz.class);
+                    item.setDataBaseId(childSnapshot.getKey());
                     quizz.add(item);
                 }
                 success.run(quizz);

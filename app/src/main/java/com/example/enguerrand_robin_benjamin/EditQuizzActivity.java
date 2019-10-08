@@ -21,7 +21,7 @@ public class EditQuizzActivity extends CreateQuizzActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_quizz);
+        setContentView(R.layout.activity_edit_quizz);
 
         Gson gson = new Gson();
         this.quizz = gson.fromJson(getIntent().getStringExtra("quizz"), Quizz.class);
@@ -52,6 +52,14 @@ public class EditQuizzActivity extends CreateQuizzActivity {
         layout.addView(child);
     }
 
+    @Override
+    public void submit(View view) {
+        Quizz quizz = generateQuizz();
+        if (quizz == null) return;
+        quizz.setDataBaseId(this.quizz.getDataBaseId());
+        insertQuizz(quizz);
+    }
+
 
     void autoFillQuizz() {
         setQuizzName();
@@ -60,5 +68,13 @@ public class EditQuizzActivity extends CreateQuizzActivity {
         for (int i = 0; i < childCount; i++) {
             setQuizzQuestion(InputLinearLayout, quizz.questions.get(i));
         }
+    }
+
+    public void deleteThisQuizz(View view) {
+        FirebaseDatabaseHelper helper = new FirebaseDatabaseHelper();
+        helper.deleteThisQuizz(this.quizz, item -> finish(), item -> {
+            String msg = (String) item;
+            Toasty.error(this, msg, Toast.LENGTH_SHORT, true).show();
+        });
     }
 }
