@@ -32,7 +32,13 @@ public class LoginActivity extends AppCompatActivity {
         else
             helper.login(new User(loginStr, passwordStr, false),
                     (item) -> {
-                        Intent intent = new Intent(this, HomeActivity.class);
+                        User user = (User) item;
+                        Intent intent;
+                        if (user.admin) {
+                            intent = new Intent(this, HomeAdminActivity.class);
+                        } else {
+                            intent = new Intent(this, HomeActivity.class);
+                        }
                         Gson gson = new Gson();
                         String myJson = gson.toJson(item);
                         intent.putExtra("user", myJson);
