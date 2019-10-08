@@ -21,6 +21,19 @@ public class CreateQuizzActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_quizz);
     }
 
+
+    public void removeQuestion(View view) {
+        View parent = (View) view.getParent();
+        LinearLayout linearLayout = findViewById(R.id.inputList);
+        linearLayout.removeView(parent);
+    }
+
+    public void removeResponse(View view) {
+        View parent = (View) view.getParent();
+        LinearLayout linearLayout = findViewById(R.id.responsesList);
+        linearLayout.removeView(parent);
+    }
+
     /// Add Input in view
     public void addQuestion(View view) {
         LinearLayout linearLayout = findViewById(R.id.inputList);

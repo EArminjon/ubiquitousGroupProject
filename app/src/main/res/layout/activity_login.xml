@@ -14,7 +14,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="76dp"
-            android:text="Sign in"
+            android:text="@string/sign_in"
             android:textSize="30sp" />
 
     <android.support.constraint.ConstraintLayout
@@ -30,14 +30,14 @@
                 android:autofillHints="Login"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="bob"
-                android:hint="name"
+                android:text="@string/bob"
+                android:hint="@string/name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-                android:text="lol"
+                android:text="@string/lol"
                 android:id="@+id/password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
                 android:autofillHints="no"
                 android:ems="10"
                 android:inputType="textPassword"
-                android:hint="password"
+                android:hint="@string/password"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/login" />
@@ -61,7 +61,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/password"
-                android:text="Sign in"
+                android:text="@string/sign_in"
                 android:onClick="doLogin"/>
 
     </android.support.constraint.ConstraintLayout>

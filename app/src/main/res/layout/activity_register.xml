@@ -14,7 +14,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="76dp"
-            android:text="Sign up"
+            android:text="@string/sign_up"
             android:textSize="30sp" />
 
     <android.support.constraint.ConstraintLayout
@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:autofillHints="Login"
                 android:ems="10"
-                android:hint="name"
+                android:hint="@string/name"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
                 android:layout_marginTop="8dp"
                 android:autofillHints="no"
                 android:ems="10"
-                android:hint="password"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +57,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="8dp"
                 android:switchPadding="16dp"
-                android:text="Admin"
+                android:text="@string/admin"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/password" />
 
@@ -69,7 +69,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="8dp"
                 android:onClick="doRegister"
-                android:text="Sign up"
+                android:text="@string/sign_up"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/adminSwitch" />
