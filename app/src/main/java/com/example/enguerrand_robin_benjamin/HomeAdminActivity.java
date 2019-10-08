@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -35,6 +36,19 @@ public class HomeAdminActivity extends AppCompatActivity {
             System.out.println(param);
             QuizzListAdapter productListViewAdapter = new QuizzListAdapter(items);
             ListView listView = findViewById(R.id.quizzList);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
+                    Quizz quizz = (Quizz) adapter.getItemAtPosition(position);
+
+                    Intent intent = new Intent(HomeAdminActivity.this, EditQuizzActivity.class);
+                    Gson gson = new Gson();
+                    String myJson = gson.toJson(quizz);
+                    intent.putExtra("quizz", myJson);
+                    startActivity(intent);
+                }
+            });
             listView.setAdapter(productListViewAdapter);
         }, System.out::println);
     }

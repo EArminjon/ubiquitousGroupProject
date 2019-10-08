@@ -18,6 +18,9 @@ public class QuizzListAdapter extends BaseAdapter {
         this.listProduct = listProduct;
     }
 
+
+
+
     @Override
     public int getCount() {
         return listProduct.size();

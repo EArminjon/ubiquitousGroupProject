@@ -12,6 +12,9 @@
             tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".CreateQuizzActivity" />
         <activity android:name=".HomeActivity" />
+        <activity
+                android:name=".EditQuizzActivity"
+                android:parentActivityName=".HomeAdminActivity" />
         <activity android:name=".HomeAdminActivity" />
         <activity
                 android:name=".RegisterActivity"

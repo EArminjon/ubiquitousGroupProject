@@ -24,13 +24,13 @@ public class CreateQuizzActivity extends AppCompatActivity {
 
     public void removeQuestion(View view) {
         View parent = (View) view.getParent();
-        LinearLayout linearLayout = findViewById(R.id.inputList);
+        LinearLayout linearLayout = ((View) parent.getParent()).findViewById(R.id.inputList);
         linearLayout.removeView(parent);
     }
 
     public void removeResponse(View view) {
         View parent = (View) view.getParent();
-        LinearLayout linearLayout = findViewById(R.id.responsesList);
+        LinearLayout linearLayout = ((View) parent.getParent()).findViewById(R.id.responsesList);
         linearLayout.removeView(parent);
     }
 
