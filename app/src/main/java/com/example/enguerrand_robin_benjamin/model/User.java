@@ -6,6 +6,7 @@ public class User {
     public String name;
     public String password;
     public boolean admin;
+    private String id;
 
     public User() {
     } //keep for firebase
@@ -21,5 +22,13 @@ public class User {
         return "name: " + name + "\n" +
                 "password: " + password + "\n" +
                 "admin: " + admin + "\n";
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

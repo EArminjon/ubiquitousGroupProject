@@ -1,4 +1,4 @@
-package com.example.enguerrand_robin_benjamin;
+package com.example.enguerrand_robin_benjamin.admin;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.enguerrand_robin_benjamin.FirebaseDatabaseHelper;
+import com.example.enguerrand_robin_benjamin.R;
 import com.example.enguerrand_robin_benjamin.model.Quizz;
 import com.example.enguerrand_robin_benjamin.model.QuizzQuestion;
 

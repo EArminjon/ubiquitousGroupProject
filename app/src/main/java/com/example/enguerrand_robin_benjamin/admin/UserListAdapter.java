@@ -1,24 +1,22 @@
-package com.example.enguerrand_robin_benjamin;
+package com.example.enguerrand_robin_benjamin.admin;
 
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.enguerrand_robin_benjamin.model.Quizz;
+import com.example.enguerrand_robin_benjamin.R;
+import com.example.enguerrand_robin_benjamin.model.User;
 
 import java.util.List;
 
-public class QuizzListAdapter extends BaseAdapter {
+public class UserListAdapter extends BaseAdapter {
 
-    private final List<Quizz> listProduct;
+    private final List<User> listProduct;
 
-    public QuizzListAdapter(List<Quizz> listProduct) {
+    public UserListAdapter(List<User> listProduct) {
         this.listProduct = listProduct;
     }
-
-
 
 
     @Override
@@ -41,13 +39,13 @@ public class QuizzListAdapter extends BaseAdapter {
 
         View viewProduct;
         if (convertView == null) {
-            viewProduct = View.inflate(parent.getContext(), R.layout.quizz_row, null);
+            viewProduct = View.inflate(parent.getContext(), R.layout.user_row, null);
         } else viewProduct = convertView;
 
 
-        Quizz product = (Quizz) getItem(position);
-        ((TextView) viewProduct.findViewById(R.id.title)).setText(product.name);
-        ((TextView) viewProduct.findViewById(R.id.questionNumber)).setText(String.valueOf(product.questions.size()));
+        User product = (User) getItem(position);
+        ((TextView) viewProduct.findViewById(R.id.nameInput)).setText(product.name);
+        ((TextView) viewProduct.findViewById(R.id.passwordInput)).setText(product.password);
         return viewProduct;
     }
 }

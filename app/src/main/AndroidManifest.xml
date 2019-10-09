@@ -11,13 +11,13 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
         <activity
-                android:name=".CreateQuizzActivity"
-                android:parentActivityName=".HomeAdminActivity" />
-        <activity android:name=".HomeActivity" />
+                android:name=".admin.CreateQuizzActivity"
+                android:parentActivityName=".admin.HomeAdminActivity" />
+        <activity android:name=".user.HomeActivity" />
         <activity
-                android:name=".EditQuizzActivity"
-                android:parentActivityName=".HomeAdminActivity" />
-        <activity android:name=".HomeAdminActivity" />
+                android:name=".admin.EditQuizzActivity"
+                android:parentActivityName=".admin.HomeAdminActivity" />
+        <activity android:name=".admin.HomeAdminActivity" />
         <activity
                 android:name=".RegisterActivity"
                 android:parentActivityName=".EnguerrandRobinBenjamin" />

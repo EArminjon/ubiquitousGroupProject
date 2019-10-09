@@ -1,16 +1,13 @@
-package com.example.enguerrand_robin_benjamin;
+package com.example.enguerrand_robin_benjamin.user;
 
-import android.content.Intent;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.enguerrand_robin_benjamin.FirebaseDatabaseHelper;
+import com.example.enguerrand_robin_benjamin.QuizzListAdapter;
+import com.example.enguerrand_robin_benjamin.R;
 import com.example.enguerrand_robin_benjamin.model.Quizz;
 import com.example.enguerrand_robin_benjamin.model.User;
 import com.google.gson.Gson;

@@ -9,7 +9,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.enguerrand_robin_benjamin.admin.HomeAdminActivity;
 import com.example.enguerrand_robin_benjamin.model.User;
+import com.example.enguerrand_robin_benjamin.user.HomeActivity;
 import com.google.gson.Gson;
 
 import es.dmoral.toasty.Toasty;

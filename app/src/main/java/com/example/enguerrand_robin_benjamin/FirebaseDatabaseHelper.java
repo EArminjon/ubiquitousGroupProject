@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 
-class FirebaseDatabaseHelper {
+public class FirebaseDatabaseHelper {
     final String errorInvalidPassword = "Invalid password";
     final String errorUserNotFound = "User not found";
     final String errorUnknown = "Database unknown error";
@@ -23,7 +23,7 @@ class FirebaseDatabaseHelper {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
 
-    FirebaseDatabaseHelper() {
+    public FirebaseDatabaseHelper() {
         mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference();
     }
@@ -51,7 +51,7 @@ class FirebaseDatabaseHelper {
         });
     }
 
-    void deleteThisQuizz(Quizz quizz, Callback success, Callback error) {
+    public void deleteThisQuizz(Quizz quizz, Callback success, Callback error) {
         DatabaseReference ref = mReference.child("quizz");
         Map<String, Object> map = new HashMap<>();
         String quizzKey = quizz.getDataBaseId();
@@ -72,7 +72,7 @@ class FirebaseDatabaseHelper {
         });
     }
 
-    void insertThisQuizz(Quizz quizz, Callback success, Callback error) {
+    public void insertThisQuizz(Quizz quizz, Callback success, Callback error) {
         DatabaseReference ref = mReference.child("quizz");
         Map<String, Object> map = new HashMap<>();
         String quizzKey = quizz.getDataBaseId();
@@ -89,7 +89,7 @@ class FirebaseDatabaseHelper {
         });
     }
 
-    void getAllQuizz(Callback success, Callback error) {
+    public void getAllQuizz(Callback success, Callback error) {
         DatabaseReference ref = mReference.child("quizz");
 
         ref.addValueEventListener(new ValueEventListener() {
@@ -99,6 +99,29 @@ class FirebaseDatabaseHelper {
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                     Quizz item = childSnapshot.getValue(Quizz.class);
                     item.setDataBaseId(childSnapshot.getKey());
+                    quizz.add(item);
+                }
+                success.run(quizz);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+                error.run(errorUnknown);
+            }
+        });
+    }
+
+    public void getAllUser(Callback success, Callback error) {
+        DatabaseReference ref = mReference.child("users");
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<User> quizz = new ArrayList<>();
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                    User item = childSnapshot.getValue(User.class);
+                    item.setId(childSnapshot.getKey());
                     quizz.add(item);
                 }
                 success.run(quizz);
@@ -125,12 +148,12 @@ class FirebaseDatabaseHelper {
         });
     }
 
-    void register(User user, Callback success, Callback error) {
+    public void register(User user, Callback success, Callback error) {
         isUserExist(user.name, error, (item) -> insertThisUser(user, success, error));
 
     }
 
-    void login(User user, Callback success, Callback error) {
+    public void login(User user, Callback success, Callback error) {
         isUserExist(user.name, (item) -> {
             User dbUser = (User) item;
             if (dbUser.password.equals(user.password))
