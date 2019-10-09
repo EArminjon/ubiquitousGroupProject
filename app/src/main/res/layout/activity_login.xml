@@ -29,15 +29,14 @@
                 android:layout_height="wrap_content"
                 android:autofillHints="Login"
                 android:ems="10"
+                android:hint="@string/name"
                 android:inputType="textPersonName"
                 android:text="@string/bob"
-                android:hint="@string/name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-                android:text="@string/lol"
                 android:id="@+id/password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,25 +45,40 @@
                 android:layout_marginTop="8dp"
                 android:autofillHints="no"
                 android:ems="10"
-                android:inputType="textPassword"
                 android:hint="@string/password"
+                android:inputType="textPassword"
+                android:text="@string/lol"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/login" />
+
         <Button
                 android:id="@+id/submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/password"
                 android:layout_alignParentEnd="true"
+                android:layout_marginTop="8dp"
                 android:backgroundTint="@color/colorBlue"
+                android:onClick="doLogin"
+                android:text="@string/sign_in"
                 android:textColor="#FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/password"/>
+
+        <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/password"
+                android:backgroundTint="@color/colorBlue"
+                android:layout_alignParentEnd="true"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/password"
-                android:text="@string/sign_in"
-                android:onClick="doLogin"/>
+                app:layout_constraintTop_toBottomOf="@+id/password" />
 
     </android.support.constraint.ConstraintLayout>
 </RelativeLayout>
