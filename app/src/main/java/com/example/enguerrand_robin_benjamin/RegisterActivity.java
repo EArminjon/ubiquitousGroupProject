@@ -43,6 +43,8 @@ public class RegisterActivity extends AppCompatActivity {
             helper.register(new User(loginStr, passwordStr, admin.isChecked()),
                     (item) -> {
                         Intent intent = new Intent(this, LoginActivity.class);
+                        button.setVisibility(View.VISIBLE);
+                        bar.setVisibility(View.GONE);
                         startActivity(intent);
                     },
                     (item) -> {

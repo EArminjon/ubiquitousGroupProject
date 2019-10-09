@@ -27,6 +27,11 @@ public class LoginActivity extends AppCompatActivity {
         findViewById(R.id.progressBar).setVisibility(View.GONE);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
     public void doLogin(View view) {
         Button button = findViewById(R.id.submit);
         ProgressBar bar = findViewById(R.id.progressBar);
@@ -42,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
             bar.setVisibility(View.VISIBLE);
             helper.login(new User(loginStr, passwordStr, false),
                     (item) -> {
+
                         User user = (User) item;
                         Intent intent;
                         if (user.admin) {
@@ -52,6 +58,8 @@ public class LoginActivity extends AppCompatActivity {
                         Gson gson = new Gson();
                         String myJson = gson.toJson(item);
                         intent.putExtra("user", myJson);
+                        button.setVisibility(View.VISIBLE);
+                        bar.setVisibility(View.GONE);
                         startActivity(intent);
                     },
                     (item) -> {
