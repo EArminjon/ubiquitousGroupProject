@@ -45,7 +45,7 @@ public class CreateQuizzActivity extends AppCompatActivity {
     public void addQuestion(View view) {
         LinearLayout linearLayout = findViewById(R.id.inputList);
         LayoutInflater inflater = LayoutInflater.from(this);
-        View child = inflater.inflate(R.layout.question, null);
+        View child = inflater.inflate(R.layout.create_question, null);
         linearLayout.addView(child);
     }
 
@@ -54,7 +54,7 @@ public class CreateQuizzActivity extends AppCompatActivity {
         View parent = (View) view.getParent();
         LinearLayout linearLayout = parent.findViewById(R.id.responsesList);
         LayoutInflater inflater = LayoutInflater.from(this);
-        View child = inflater.inflate(R.layout.response, null);
+        View child = inflater.inflate(R.layout.create_response, null);
         linearLayout.addView(child);
     }
 
@@ -70,12 +70,12 @@ public class CreateQuizzActivity extends AppCompatActivity {
     }
 
     /// Get input value
-    QuizzResponse getResponseName(View v) {
+    QuizzResponse getResponses(View v) {
         QuizzResponse response = new QuizzResponse();
         response.name = ((EditText) v.findViewById(R.id.responseName)).getText().toString();
         response.correct = ((CheckBox) v.findViewById(R.id.answer)).isChecked();
         if (response.name.isEmpty()) {
-            Toasty.error(this, "You need to provide a response name", Toast.LENGTH_SHORT, true).show();
+            Toasty.error(this, "You need to provide a create_response name", Toast.LENGTH_SHORT, true).show();
             return null;
         }
         return response;
@@ -86,7 +86,7 @@ public class CreateQuizzActivity extends AppCompatActivity {
         String questionName = ((EditText) v.findViewById(R.id.questionName)).getText().toString();
 
         if (questionName.isEmpty()) {
-            Toasty.error(this, "You need to provide the question name", Toast.LENGTH_SHORT, true).show();
+            Toasty.error(this, "You need to provide the create_question name", Toast.LENGTH_SHORT, true).show();
             return null;
         }
         return questionName;
@@ -100,11 +100,11 @@ public class CreateQuizzActivity extends AppCompatActivity {
         QuizzQuestion quizzQuestion = new QuizzQuestion();
         quizzQuestion.question = questionName;
 
-        LinearLayout ResponseLinearLayout = findViewById(R.id.responsesList);
+        LinearLayout ResponseLinearLayout = v.findViewById(R.id.responsesList);
         final int childCount2 = ResponseLinearLayout.getChildCount();
         for (int j = 0; j < childCount2; j++) {
             View v2 = ResponseLinearLayout.getChildAt(j);
-            QuizzResponse responseName = getResponseName(v2);
+            QuizzResponse responseName = getResponses(v2);
             if (responseName == null) return null;
             quizzQuestion.addResponses(responseName);
         }

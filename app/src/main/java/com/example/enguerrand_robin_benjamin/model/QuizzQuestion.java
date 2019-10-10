@@ -23,7 +23,7 @@ public class QuizzQuestion {
 
     @NonNull
     public String toString() {
-        return "question: " + question + "\n" +
+        return "create_question: " + question + "\n" +
                 "responses length: " + responses.size() + "\n" +
                 "responses: " + responses.toString() + "\n";
     }

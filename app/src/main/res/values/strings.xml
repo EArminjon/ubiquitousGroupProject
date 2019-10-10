@@ -30,4 +30,7 @@
     <string name="n_a">N/A</string>
     <string name="delete_self_warning">You can\'t delete yourself</string>
     <string name="answer">Answer</string>
+    <string name="next">Next</string>
+    <string name="previous">previous</string>
+    <string name="question">Question</string>
 </resources>

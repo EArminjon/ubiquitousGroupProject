@@ -41,14 +41,14 @@ public class EditQuizzActivity extends CreateQuizzActivity {
 
     void setQuizzQuestion(LinearLayout layout, QuizzQuestion quizzQuestion) {
         LayoutInflater inflater = LayoutInflater.from(this);
-        View child = inflater.inflate(R.layout.question, null);
+        View child = inflater.inflate(R.layout.create_question, null);
         EditText questionName = child.findViewById(R.id.questionName);
         questionName.setText(quizzQuestion.question);
 
         LinearLayout responseLinearLayout = child.findViewById(R.id.responsesList);
         final int childCount = quizzQuestion.responses.size();
         for (int i = 0; i < childCount; i++) {
-            View subChild = inflater.inflate(R.layout.response, null);
+            View subChild = inflater.inflate(R.layout.create_response, null);
             EditText response = subChild.findViewById(R.id.responseName);
             CheckBox answer = subChild.findViewById(R.id.answer);
             response.setText(quizzQuestion.responses.get(i).name);
