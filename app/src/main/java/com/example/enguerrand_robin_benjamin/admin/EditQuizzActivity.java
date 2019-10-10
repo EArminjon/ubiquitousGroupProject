@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -49,7 +50,9 @@ public class EditQuizzActivity extends CreateQuizzActivity {
         for (int i = 0; i < childCount; i++) {
             View subChild = inflater.inflate(R.layout.response, null);
             EditText response = subChild.findViewById(R.id.responseName);
-            response.setText(quizzQuestion.responses.get(i));
+            CheckBox answer = subChild.findViewById(R.id.answer);
+            response.setText(quizzQuestion.responses.get(i).name);
+            answer.setChecked(quizzQuestion.responses.get(i).correct);
             responseLinearLayout.addView(subChild);
         }
         layout.addView(child);

@@ -1,6 +1,6 @@
 <resources>
-    <string name="autologin">a</string>
-    <string name="autopassword">a</string>
+    <string name="autologin">bob</string>
+    <string name="autopassword">lol</string>
     <string name="app_name">enguerrand_robin_benjamin</string>
     <string name="response">Response…</string>
     <string name="_0">0</string>
@@ -29,4 +29,5 @@
     <string name="score">Score</string>
     <string name="n_a">N/A</string>
     <string name="delete_self_warning">You can\'t delete yourself</string>
+    <string name="answer">Answer</string>
 </resources>

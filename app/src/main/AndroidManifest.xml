@@ -18,9 +18,13 @@
                 android:parentActivityName=".admin.HomeAdminActivity" />
         <activity android:name=".user.HomeActivity" />
         <activity
+                android:name=".user.PlayQuizz"
+                android:parentActivityName=".user.HomeActivity" />
+        <activity
                 android:name=".admin.EditQuizzActivity"
                 android:parentActivityName=".admin.HomeAdminActivity" />
-        <activity android:name=".admin.HomeAdminActivity"
+        <activity
+                android:name=".admin.HomeAdminActivity"
                 android:launchMode="singleTop" />
         <activity
                 android:name=".RegisterActivity"

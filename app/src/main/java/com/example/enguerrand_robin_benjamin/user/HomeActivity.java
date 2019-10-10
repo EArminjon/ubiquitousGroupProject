@@ -1,5 +1,6 @@
 package com.example.enguerrand_robin_benjamin.user;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.widget.ListView;
 import com.example.enguerrand_robin_benjamin.FirebaseDatabaseHelper;
 import com.example.enguerrand_robin_benjamin.QuizzListAdapter;
 import com.example.enguerrand_robin_benjamin.R;
+import com.example.enguerrand_robin_benjamin.admin.EditQuizzActivity;
 import com.example.enguerrand_robin_benjamin.model.Quizz;
 import com.example.enguerrand_robin_benjamin.model.User;
 import com.google.gson.Gson;
@@ -33,6 +35,20 @@ public class HomeActivity extends AppCompatActivity {
             System.out.println(param);
             QuizzListAdapter productListViewAdapter = new QuizzListAdapter(items);
             ListView listView = findViewById(R.id.quizzList);
+
+            listView.setOnItemClickListener((adapter, v, position, id) -> {
+                Quizz quizz = (Quizz) adapter.getItemAtPosition(position);
+
+                Intent intent = new Intent(this, PlayQuizz.class);
+                Gson gson1 = new Gson();
+                String myJson = gson1.toJson(quizz);
+                intent.putExtra("quizz", myJson);
+                myJson = gson1.toJson(user);
+                intent.putExtra("user", myJson);
+                startActivity(intent);
+            });
+
+
             listView.setAdapter(productListViewAdapter);
         }, System.out::println);
     }

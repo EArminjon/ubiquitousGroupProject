@@ -7,17 +7,17 @@ import java.util.List;
 
 public class QuizzQuestion {
     public String question;
-    public List<String> responses = new ArrayList<>();
+    public List<QuizzResponse> responses = new ArrayList<>();
 
     public QuizzQuestion() {
     } //keep for firebase
 
-    public QuizzQuestion(String question, List<String> responses) {
+    public QuizzQuestion(String question, List<QuizzResponse> responses) {
         this.question = question;
         this.responses = responses;
     }
 
-    public void addResponses(String response) {
+    public void addResponses(QuizzResponse response) {
         responses.add(response);
     }
 

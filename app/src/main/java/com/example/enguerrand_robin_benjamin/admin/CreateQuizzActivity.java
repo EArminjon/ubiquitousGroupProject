@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import com.example.enguerrand_robin_benjamin.FirebaseDatabaseHelper;
 import com.example.enguerrand_robin_benjamin.R;
 import com.example.enguerrand_robin_benjamin.model.Quizz;
 import com.example.enguerrand_robin_benjamin.model.QuizzQuestion;
+import com.example.enguerrand_robin_benjamin.model.QuizzResponse;
 
 import es.dmoral.toasty.Toasty;
 
@@ -68,13 +70,15 @@ public class CreateQuizzActivity extends AppCompatActivity {
     }
 
     /// Get input value
-    String getResponseName(View v) {
-        String name = ((EditText) v.findViewById(R.id.responseName)).getText().toString();
-        if (name.isEmpty()) {
+    QuizzResponse getResponseName(View v) {
+        QuizzResponse response = new QuizzResponse();
+        response.name = ((EditText) v.findViewById(R.id.responseName)).getText().toString();
+        response.correct = ((CheckBox) v.findViewById(R.id.answer)).isChecked();
+        if (response.name.isEmpty()) {
             Toasty.error(this, "You need to provide a response name", Toast.LENGTH_SHORT, true).show();
             return null;
         }
-        return name;
+        return response;
     }
 
     /// Get input value
@@ -100,12 +104,22 @@ public class CreateQuizzActivity extends AppCompatActivity {
         final int childCount2 = ResponseLinearLayout.getChildCount();
         for (int j = 0; j < childCount2; j++) {
             View v2 = ResponseLinearLayout.getChildAt(j);
-            String responseName = getResponseName(v2);
+            QuizzResponse responseName = getResponseName(v2);
             if (responseName == null) return null;
             quizzQuestion.addResponses(responseName);
         }
         if (quizzQuestion.responses == null || quizzQuestion.responses.size() < 2) {
             Toasty.error(this, "You need to add at least two responses", Toast.LENGTH_SHORT, true).show();
+            return null;
+        }
+        int answer = 0;
+        for (int i =  0; i < quizzQuestion.responses.size(); ++i) {
+            QuizzResponse response = quizzQuestion.responses.get(i);
+            if (response.correct)
+                answer += 1;
+        }
+        if (answer != 1) {
+            Toasty.error(this, "You need to check one and only one answer", Toast.LENGTH_SHORT, true).show();
             return null;
         }
         return quizzQuestion;
