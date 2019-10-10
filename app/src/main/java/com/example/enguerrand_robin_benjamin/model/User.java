@@ -2,13 +2,14 @@ package com.example.enguerrand_robin_benjamin.model;
 
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
     public String name;
     public String password;
     public boolean admin;
-    public List<QuizzScore> scores;
+    public List<QuizzScore> scores = new ArrayList<>();
     public String dataBaseId;
 
     public User() {

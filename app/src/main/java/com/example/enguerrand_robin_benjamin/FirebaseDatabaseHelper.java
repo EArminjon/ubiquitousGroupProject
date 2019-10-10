@@ -11,14 +11,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
 public class FirebaseDatabaseHelper {
-    final String errorInvalidPassword = "Invalid password";
-    final String errorUserNotFound = "User not found";
-    final String errorUnknown = "Database unknown error";
+    private final String errorInvalidPassword = "Invalid password";
+    private final String errorUserNotFound = "User not found";
+    private final String errorUnknown = "Database unknown error";
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
@@ -158,7 +157,7 @@ public class FirebaseDatabaseHelper {
         });
     }
 
-    private void insertThisUser(User user, Callback success, Callback error) {
+    public void updateOrCreateThisUser(User user, Callback success, Callback error) {
         DatabaseReference ref = mReference.child("users");
 
 
@@ -179,7 +178,7 @@ public class FirebaseDatabaseHelper {
     }
 
     public void register(User user, Callback success, Callback error) {
-        isUserExist(user.name, error, (item) -> insertThisUser(user, success, error));
+        isUserExist(user.name, error, (item) -> updateOrCreateThisUser(user, success, error));
 
     }
 

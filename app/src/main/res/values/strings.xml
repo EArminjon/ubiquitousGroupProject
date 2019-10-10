@@ -1,6 +1,8 @@
 <resources>
-    <string name="autologin">bob</string>
-    <string name="autopassword">lol</string>
+<!--    <string name="autologin">bob</string>-->
+<!--    <string name="autopassword">lol</string>-->
+    <string name="autologin">a</string>
+    <string name="autopassword">a</string>
     <string name="app_name">enguerrand_robin_benjamin</string>
     <string name="response">Response…</string>
     <string name="_0">0</string>

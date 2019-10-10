@@ -1,41 +1,73 @@
 package com.example.enguerrand_robin_benjamin.user;
 
-import android.content.Intent;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.InputType;
+import android.text.method.DigitsKeyListener;
+import android.text.method.KeyListener;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.enguerrand_robin_benjamin.QuizzListAdapter;
+import com.example.enguerrand_robin_benjamin.Callback;
+import com.example.enguerrand_robin_benjamin.FirebaseDatabaseHelper;
 import com.example.enguerrand_robin_benjamin.R;
 import com.example.enguerrand_robin_benjamin.model.Quizz;
 import com.example.enguerrand_robin_benjamin.model.QuizzQuestion;
 import com.example.enguerrand_robin_benjamin.model.QuizzResponse;
+import com.example.enguerrand_robin_benjamin.model.QuizzScore;
 import com.example.enguerrand_robin_benjamin.model.User;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
 import es.dmoral.toasty.Toasty;
-
-//class QuizzUserAnswer {
-//    int questionPosition = -1, answerPosition = -1;
-//    boolean correct;
-//}
 
 public class PlayQuizz extends AppCompatActivity {
     Quizz quizz;
     User user;
     int index = 0;
     ResponseListAdapter productListViewAdapter;
+
+    void randomQuestionGenerator(Callback success) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setTitle("Number between 0 - 9");
+
+        final EditText input = new EditText(this);
+
+        input.setInputType(InputType.TYPE_CLASS_PHONE);
+        KeyListener keyListener = DigitsKeyListener.getInstance("1234567890");
+        input.setKeyListener(keyListener);
+        InputFilter[] editFilters = input.getFilters();
+        InputFilter[] newFilters = new InputFilter[editFilters.length + 1];
+        System.arraycopy(editFilters, 0, newFilters, 0, editFilters.length);
+        newFilters[editFilters.length] = new InputFilter.LengthFilter(1); //the desired length
+        input.setFilters(newFilters);
+
+
+        builder.setView(input);
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            int inputNumber = Integer.parseInt(input.getText().toString());
+            success.run(inputNumber);
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                finish();
+            }
+        });
+
+        builder.show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +82,15 @@ public class PlayQuizz extends AppCompatActivity {
         bar.setTitle("Quizz: " + quizz.name);
 
 
-        ListView listView = findViewById(R.id.choiceList);
-        productListViewAdapter = new ResponseListAdapter();
-        listView.setAdapter(productListViewAdapter);
-        generateThisQuestion(index);
+        randomQuestionGenerator(item -> {
+            System.out.println(item);
+            Collections.shuffle(quizz.questions);
+
+            ListView listView = findViewById(R.id.choiceList);
+            productListViewAdapter = new ResponseListAdapter();
+            listView.setAdapter(productListViewAdapter);
+            generateThisQuestion(index);
+        });
     }
 
     void generateThisQuestion(int i) {
@@ -87,6 +124,17 @@ public class PlayQuizz extends AppCompatActivity {
         return true;
     }
 
+    int computeScore() {
+        int score = 0;
+        for (QuizzQuestion question : quizz.questions) {
+            for (QuizzResponse response : question.responses) {
+                if (response.choosed && response.correct)
+                    score += 1;
+            }
+        }
+        return score;
+    }
+
     public void onNext(View view) {
         if (index >= quizz.questions.size()) {
             Toasty.info(this, "This is the last question", Toast.LENGTH_SHORT, true).show();
@@ -97,7 +145,8 @@ public class PlayQuizz extends AppCompatActivity {
                 ++index;
                 generateThisQuestion(index);
             } else {
-                Toasty.info(this, "Submit your response ?", Toast.LENGTH_SHORT, true).show();
+                int result = computeScore();
+                submit(result);
             }
         }
     }
@@ -111,5 +160,30 @@ public class PlayQuizz extends AppCompatActivity {
             --index;
             generateThisQuestion(index);
         }
+    }
+
+    void submit(int result) {
+        DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+            switch (which) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    Toasty.success(this, "Your score: " + result, Toast.LENGTH_SHORT, true).show();
+                    user.scores.add(new QuizzScore(quizz.name, result, quizz.questions.size()));
+                    FirebaseDatabaseHelper helper = new FirebaseDatabaseHelper();
+                    helper.updateOrCreateThisUser(this.user, item -> finish(), item -> {
+                        String msg = (String) item;
+                        Toasty.error(this, msg, Toast.LENGTH_SHORT, true).show();
+                    });
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Quizz ready to submit, process ?")
+                .setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener)
+                .show();
     }
 }

@@ -10,8 +10,8 @@ public class QuizzScore {
     public QuizzScore() {
     } //keep for firebase
 
-    public QuizzScore(String quizzId, int score, int numberOfQuestion) {
-        this.name = quizzId;
+    public QuizzScore(String quizzName, int score, int numberOfQuestion) {
+        this.name = quizzName;
         this.score = score;
         this.numberOfQuestion = numberOfQuestion;
     }

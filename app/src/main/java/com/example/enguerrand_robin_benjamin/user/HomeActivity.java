@@ -34,7 +34,6 @@ public class HomeActivity extends AppCompatActivity {
         FirebaseDatabaseHelper helper = new FirebaseDatabaseHelper();
         helper.getAllQuizz(param -> {
             List<Quizz> items = (List<Quizz>) param;
-            System.out.println(param);
             QuizzListAdapter productListViewAdapter = new QuizzListAdapter(items);
             ListView listView = findViewById(R.id.quizzList);
 
@@ -49,8 +48,6 @@ public class HomeActivity extends AppCompatActivity {
                 intent.putExtra("user", myJson);
                 startActivity(intent);
             });
-
-
             listView.setAdapter(productListViewAdapter);
         }, System.out::println);
     }
