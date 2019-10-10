@@ -36,6 +36,7 @@ public class FirebaseDatabaseHelper {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                     User user = childSnapshot.getValue(User.class);
+                    user.dataBaseId = childSnapshot.getKey();
                     if (userName.equals(user.name)) {
                         found.run(user);
                         return;
@@ -54,7 +55,7 @@ public class FirebaseDatabaseHelper {
     public void deleteThisQuizz(Quizz quizz, Callback success, Callback error) {
         DatabaseReference ref = mReference.child("quizz");
         Map<String, Object> map = new HashMap<>();
-        String quizzKey = quizz.getDataBaseId();
+        String quizzKey = quizz.dataBaseId;
         if (quizzKey == null) {
             error.run("Quizz id is null");
             return;
@@ -72,11 +73,33 @@ public class FirebaseDatabaseHelper {
         });
     }
 
+    public void deleteThisUser(User user, Callback success, Callback error) {
+        DatabaseReference ref = mReference.child("quizz");
+        Map<String, Object> map = new HashMap<>();
+        String userKey = user.dataBaseId;
+        if (userKey == null) {
+            error.run("Quizz id is null");
+            return;
+        }
+        String key = userKey;
+        map.put(key, null);
+        ref.updateChildren(map, (databaseError, databaseReference) -> {
+            if (databaseError != null) {
+                System.out.println("Data could not be deleted " + databaseError.getMessage());
+                error.run(databaseError.getMessage());
+            } else {
+                System.out.println("Data saved successfully.");
+                success.run(true);
+            }
+        });
+    }
+
     public void insertThisQuizz(Quizz quizz, Callback success, Callback error) {
         DatabaseReference ref = mReference.child("quizz");
         Map<String, Object> map = new HashMap<>();
-        String quizzKey = quizz.getDataBaseId();
+        String quizzKey = quizz.dataBaseId;
         String key = quizzKey != null ? quizzKey : ref.push().getKey();
+        quizz.dataBaseId = null;
         map.put(key, quizz);
         ref.updateChildren(map, (databaseError, databaseReference) -> {
             if (databaseError != null) {
@@ -98,7 +121,7 @@ public class FirebaseDatabaseHelper {
                 ArrayList<Quizz> quizz = new ArrayList<>();
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                     Quizz item = childSnapshot.getValue(Quizz.class);
-                    item.setDataBaseId(childSnapshot.getKey());
+                    item.dataBaseId = childSnapshot.getKey();
                     quizz.add(item);
                 }
                 success.run(quizz);
@@ -121,7 +144,7 @@ public class FirebaseDatabaseHelper {
                 ArrayList<User> quizz = new ArrayList<>();
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                     User item = childSnapshot.getValue(User.class);
-                    item.setId(childSnapshot.getKey());
+                    item.dataBaseId = childSnapshot.getKey();
                     quizz.add(item);
                 }
                 success.run(quizz);
@@ -137,7 +160,14 @@ public class FirebaseDatabaseHelper {
 
     private void insertThisUser(User user, Callback success, Callback error) {
         DatabaseReference ref = mReference.child("users");
-        ref.push().setValue(user, (databaseError, databaseReference) -> {
+
+
+        Map<String, Object> map = new HashMap<>();
+        String userKey = user.dataBaseId;
+        String key = userKey != null ? userKey : ref.push().getKey();
+        user.dataBaseId = null;
+        map.put(key, user);
+        ref.updateChildren(map, (databaseError, databaseReference) -> {
             if (databaseError != null) {
                 System.out.println("Data could not be saved " + databaseError.getMessage());
                 error.run(databaseError.getMessage());

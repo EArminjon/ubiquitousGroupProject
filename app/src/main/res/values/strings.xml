@@ -1,6 +1,8 @@
 <resources>
+    <string name="autologin">a</string>
+    <string name="autopassword">a</string>
     <string name="app_name">enguerrand_robin_benjamin</string>
-    <string name="response">Response...</string>
+    <string name="response">Response…</string>
     <string name="_0">0</string>
     <string name="number_of_question">Number of question</string>
     <string name="empty">Empty</string>
@@ -14,13 +16,17 @@
     <string name="welcome_to_quizz_app">Welcome to Quizz App</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
-    <string name="bob">bob</string>
-    <string name="lol">lol</string>
     <string name="sign_in">Sign in</string>
     <string name="list_of_all_available_quizz">List of all available quizz</string>
     <string name="create_a_new_quizz">Create a new quizz</string>
     <string name="submit">Submit</string>
     <string name="delete_this_quizz">Delete this Quizz</string>
     <string name="password_hint">******</string>
-    <string name="list_all_user">List all user</string>
+    <string name="list_all_user">List all users</string>
+    <string name="delete_this_user">Delete this user</string>
+    <string name="quizz_score">%d / %d</string>
+    <string name="quizz_name">Quizz name</string>
+    <string name="score">Score</string>
+    <string name="n_a">N/A</string>
+    <string name="delete_self_warning">You can\'t delete yourself</string>
 </resources>

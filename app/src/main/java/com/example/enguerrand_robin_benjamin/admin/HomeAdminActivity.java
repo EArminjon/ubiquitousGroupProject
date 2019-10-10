@@ -15,15 +15,16 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.enguerrand_robin_benjamin.R;
+import com.example.enguerrand_robin_benjamin.model.User;
+import com.google.gson.Gson;
 
 public class HomeAdminActivity extends AppCompatActivity {
+    User user;
 
     public void doCreateNewQuizz(View view) {
         Intent intent = new Intent(this, CreateQuizzActivity.class);
         startActivity(intent);
     }
-
-    private static final int NUM_PAGES = 2;
 
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
@@ -37,15 +38,37 @@ public class HomeAdminActivity extends AppCompatActivity {
     private PagerAdapter pagerAdapter;
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Gson gson = new Gson();
+        outState.putString("user", gson.toJson(user));
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Gson gson = new Gson();
+        user = gson.fromJson(savedInstanceState.getString("user"), User.class);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home);
         ActionBar bar = getSupportActionBar();
         bar.setTitle("Home - Admin");
 
+        if (savedInstanceState == null) {
+            Gson gson = new Gson();
+            user = gson.fromJson(getIntent().getStringExtra("user"), User.class);
+        } else {
+            Gson gson = new Gson();
+            user = gson.fromJson(savedInstanceState.getString("user"), User.class);
+        }
+
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = findViewById(R.id.pager);
-        pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+        pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager(), user);
         mPager.setAdapter(pagerAdapter);
     }
 
@@ -69,99 +92,35 @@ public class HomeAdminActivity extends AppCompatActivity {
         else
             mPager.setCurrentItem(mPager.getCurrentItem() - 1);
     }
-
-    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
-
-        public ScreenSlidePagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            if (position == 0)
-                return new QuizzFragment();
-            else
-                return new UserFragment();
-        }
-
-        @Override
-        public int getCount() {
-            return NUM_PAGES;
-        }
-    }
 }
 
-//import android.content.Intent;
-//import android.os.Bundle;
-//import android.support.v7.app.ActionBar;
-//import android.support.v7.app.AppCompatActivity;
-//import android.view.Menu;
-//import android.view.MenuItem;
-//import android.view.View;
-//import android.widget.ListView;
-//
-//import com.example.enguerrand_robin_benjamin.FirebaseDatabaseHelper;
-//import com.example.enguerrand_robin_benjamin.QuizzListAdapter;
-//import com.example.enguerrand_robin_benjamin.R;
-//import com.example.enguerrand_robin_benjamin.model.Quizz;
-//import com.example.enguerrand_robin_benjamin.model.User;
-//import com.google.gson.Gson;
-//
-//import java.util.List;
+class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+    private static final int NUM_PAGES = 2;
+    private User currentUser;
 
-//public class HomeAdminActivity extends AppCompatActivity {
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_admin_home);
-//        ActionBar bar = getSupportActionBar();
-//        bar.setTitle("Home - Admin");
-//
-//        Gson gson = new Gson();
-//        User user = gson.fromJson(getIntent().getStringExtra("user"), User.class);
-//
-//
-//        FirebaseDatabaseHelper helper = new FirebaseDatabaseHelper();
-//        helper.getAllQuizz(param -> {
-//            List<Quizz> items = (List<Quizz>) param;
-//            QuizzListAdapter productListViewAdapter = new QuizzListAdapter(items);
-//            ListView listView = findViewById(R.id.quizzList);
-//
-//            listView.setOnItemClickListener((adapter, v, position, id) -> {
-//                Quizz quizz = (Quizz) adapter.getItemAtPosition(position);
-//
-//                Intent intent = new Intent(HomeAdminActivity.this, EditQuizzActivity.class);
-//                Gson gson1 = new Gson();
-//                String myJson = gson1.toJson(quizz);
-//                intent.putExtra("quizz", myJson);
-//                startActivity(intent);
-//            });
-//
-//            listView.setAdapter(productListViewAdapter);
-//        }, System.out::println);
-//    }
-//
+    ScreenSlidePagerAdapter(FragmentManager fm, User currentUser) {
+        super(fm);
 
-//
-//    public void doCreateNewQuizz(View view) {
-//        Intent intent = new Intent(this, CreateQuizzActivity.class);
-//        startActivity(intent);
-//    }
-//}
+        this.currentUser = currentUser;
+    }
 
+    @Override
+    public Fragment getItem(int position) {
+        if (position == 0)
+            return new QuizzFragment();
+        else {
+            Fragment fragment = new UserFragment();
+            Bundle args = new Bundle();
+            Gson gson = new Gson();
+            String myJson = gson.toJson(currentUser);
+            args.putString("user", myJson);
+            fragment.setArguments(args);
+            return fragment;
+        }
+    }
 
-//        Quizz quizz = new Quizz("Les jeux",
-//                Arrays.asList(
-//                        new QuizzQuestion("aimes-tu mario ?", Arrays.asList("oui", "non")),
-//                        new QuizzQuestion("aimes-tu pitch ?", Arrays.asList("oui", "non")),
-//                        new QuizzQuestion("aimes-tu luigi ?", Arrays.asList("oui", "non")),
-//                        new QuizzQuestion("aimes-tu bob ?", Arrays.asList("oui", "non")),
-//                        new QuizzQuestion("aimes-tu gotaga ?", Arrays.asList("oui", "non"))
-//                )
-//        );
-//        helper.insertThisQuizz(quizz, param -> {
-//            System.out.println(param);
-//        }, param -> {
-//            System.out.println(param);
-//        });
+    @Override
+    public int getCount() {
+        return NUM_PAGES;
+    }
+}

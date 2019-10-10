@@ -59,7 +59,7 @@ public class EditQuizzActivity extends CreateQuizzActivity {
     public void submit(View view) {
         Quizz quizz = generateQuizz();
         if (quizz == null) return;
-        quizz.setDataBaseId(this.quizz.getDataBaseId());
+        quizz.dataBaseId = this.quizz.dataBaseId;
         insertQuizz(quizz);
     }
 

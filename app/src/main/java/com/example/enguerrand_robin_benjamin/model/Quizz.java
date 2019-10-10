@@ -8,15 +8,7 @@ import java.util.List;
 public class Quizz {
     public String name;
     public List<QuizzQuestion> questions = new ArrayList<>();
-    private String dataBaseId;
-
-    public void setDataBaseId(String dataBaseId) {
-        this.dataBaseId = dataBaseId;
-    }
-
-    public String getDataBaseId() {
-        return this.dataBaseId;
-    }
+    public String dataBaseId;
 
     public Quizz() {
     } //keep for firebase
@@ -34,6 +26,7 @@ public class Quizz {
     public String toString() {
         return "name: " + name + "\n" +
                 "quizz length: " + questions.size() + "\n" +
-                "quizz: " + questions.toString() + "\n";
+                "quizz: " + questions.toString() + "\n" +
+                "id:" + dataBaseId;
     }
 }

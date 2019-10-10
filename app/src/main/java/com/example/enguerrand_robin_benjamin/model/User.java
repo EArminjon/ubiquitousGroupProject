@@ -2,11 +2,14 @@ package com.example.enguerrand_robin_benjamin.model;
 
 import android.support.annotation.NonNull;
 
+import java.util.List;
+
 public class User {
     public String name;
     public String password;
     public boolean admin;
-    private String id;
+    public List<QuizzScore> scores;
+    public String dataBaseId;
 
     public User() {
     } //keep for firebase
@@ -21,14 +24,7 @@ public class User {
     public String toString() {
         return "name: " + name + "\n" +
                 "password: " + password + "\n" +
-                "admin: " + admin + "\n";
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+                "admin: " + admin + "\n" +
+                "id:" + dataBaseId;
     }
 }

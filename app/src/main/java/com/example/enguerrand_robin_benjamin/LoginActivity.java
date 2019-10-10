@@ -54,15 +54,16 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent;
                         if (user.admin) {
                             intent = new Intent(this, HomeAdminActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         } else {
                             intent = new Intent(this, HomeActivity.class);
                         }
                         Gson gson = new Gson();
-                        String myJson = gson.toJson(item);
+                        String myJson = gson.toJson(user);
                         intent.putExtra("user", myJson);
+                        startActivity(intent);
                         button.setVisibility(View.VISIBLE);
                         bar.setVisibility(View.GONE);
-                        startActivity(intent);
                     },
                     (item) -> {
                         bar.setVisibility(View.GONE);
